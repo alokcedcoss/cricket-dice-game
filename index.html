@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+      <style>
+          
+          body{
+              margin-top:3%;
+              text-align: center;
+              background-image: url("back.jpg");
+              background-attachment: fixed;
+              background-repeat: no-repeat;
+              background-size: cover;
+            color: white;
+              
+
+          }
+          .tossheading
+          {
+              border: 5px inset red;
+              
+          }
+          .buttonformat{
+              margin-left:35%;
+          }
+          .s,.s1
+          {
+              text-align: center;
+          }
+          h2{
+              margin-top: 15%;
+              color:white;
+          }
+      </style>
+    <meta charset="utf-8">
+    <title>title</title>
+  </head>
+  <body onload="selecttoss()">
+<div>
+    <h1 id="tossheading"></h1>
+    
+
+</div>
+<div class="coinhead" style="display: none; margin-top:1%">
+
+<img src="head.jpg" height="100px" width="100px;">
+<!-- <h3 id="s"></h3> -->
+</div>
+<div class="cointail" style="display: none; margin-top: 1%;">
+    
+    <img src="tail.jpg" height="100px" width="100px;">
+    <!-- <h3 id="s"></h3> -->
+</div>
+<div class="buttonformat">
+    
+    <input type="button" id="btn1" class="btn btn-danger" value="Tossed the Coin" onclick="tossed_coin()" style="display:block; text-align: center;">
+</div>
+</input>
+<h3 id="s1"></h3> 
+ <h3 id="s"></h3> 
+<div class="decision" style="display: none; margin-top:1%;">
+   <input type="button"class="btn btn-warning" value="batting 1st inning" onclick="pro()"> 
+   
+   <h2 id="run"></h2> 
+
+<h2 id="result"></h2> 
+</div>
+<div class="decision1" style="display: none; margin-top:2%;">
+    <input type="button" class="btn btn-warning" value="batting  2nd Inning" onclick="pro1()"> 
+<h2 id="result1"></h2> 
+<h2 id="result2"></h2> 
+</div>
+<script>
+var a,b,dice3,dice1, dice2,count;
+var sum=0,sum1=0;
+var timeinter;
+var timeinter1;
+var r,d;
+         function selecttoss()
+        {
+            a= Math.floor(Math.random()*2);
+            console.log(a);
+            if(a==0)
+            {
+                document.getElementById("tossheading").innerHTML="Welcome To Team "+a+" your call is head ";
+               console.log("Welcome To Team 0 your call is head ");
+            }
+            else
+            {
+                document.getElementById("tossheading").innerHTML="Welcome To Team "+a+" your call is tail";
+                console.log("Welcome To Team 1 your call is tail");
+            }
+        }
+
+        function tossed_coin()
+        {
+             b = Math.floor(Math.random()*2);
+            console.log(b);
+         alert("welcome to the toss.....")
+            if(b!=0)
+            {
+                document.querySelector(".cointail").style.display='block';
+                document.querySelector(".coinhead").style.display='none';
+                document.getElementById("btn1").style.display='none';
+            }
+            else if(b==0)
+            {
+                document.querySelector(".coinhead").style.display='block';
+                document.querySelector(".cointail").style.display='none';
+                document.getElementById("btn1").style.display='none';
+            }
+    
+            if(a==b)
+         {
+             console.log("you won the toss");
+             document.getElementById("s").innerHTML="Team "+a+" you won the toss and Please choose your decision";
+             document.querySelector(".decision").style.display='block';
+         }
+         else if(a!=b)
+         
+        {
+             console.log("you loss the toss");
+            document.getElementById("s").innerHTML="Team "+b+" you won the toss  and Please choose your decision..........";
+            document.querySelector(".decision").style.display='block';
+        
+         }
+         }
+
+         function pro()
+{
+timeinter=setInterval(()=>{decision_aftertoss()},1000);
+
+
+
+}
+function pro1()
+{
+     timeinter1=setInterval(()=>{decision_aftertoss1()},1000);
+     result();
+
+}
+function decision_aftertoss()
+            {    
+                dice=Math.floor(Math.random()*6)+1;
+                
+            console.log(dice);
+            sum=sum+dice; 
+            for(var i=0;i<6;i++)
+            {
+                if (dice == 6) 
+                {
+                    lastRoll = 6;
+                    count += 1;
+                }
+                else 
+                {
+                    lastRoll = 0;
+                    count = 0;
+                }
+                if (dice == 6 && lastRoll == 6 && count == 2)
+                {
+                    lastRoll = 0;
+                    count = 0;
+                    
+                    clearInterval(timeinter);
+                    alert('You rolled a six twice!');
+                    document.getElementById("result").innerHTML="The total Run  of the team " +sum;
+                    document.querySelector(".decision1").style.display='block';          
+// console.log("The total Run  of the team " +sum);
+
+
+     
+     }
+     d=sum; 
+}
+
+            }
+
+            
+function decision_aftertoss1()
+{
+dice1=Math.floor(Math.random()*6)+1;
+           
+            // console.log(dice1);
+            sum1=sum1+dice1; 
+            for(var i=0;i<6;i++)
+            {
+                if (dice1 === 6) 
+            {
+                 lastRoll = 6;
+                 count += 1;
+    }
+     else 
+        {
+        lastRoll = 0;
+        count = 0;
+         }
+    if (dice1 === 6 && lastRoll === 6 && count === 2)
+     {
+        
+        lastRoll = 0;
+        count = 0;
+        // console.log(dice1);
+       
+        clearInterval(timeinter1);
+     alert('You rolled a six twice!');   
+     result();
+     }
+   
+r=sum1;
+
+}
+document.getElementById("result1").innerHTML="The total Run  of the team " +sum1;
+// console.log("The total Run " +sum1);
+    
+}
+
+function result()
+{
+
+    if(d==r)
+    {
+        console.log("draw");
+        document.getElementById("result2").innerHTML="Match Draw";
+    }
+    else if(d<r)
+    {
+        document.getElementById("result2").innerHTML="Match win team "+a;
+
+    }
+    else if(d>r)
+    {
+        console.log(" winner");
+        document.getElementById("result2").innerHTML="Match win team "+b;
+    }
+}
+</script>
